@@ -88,3 +88,15 @@ $$R1 = \sum_{c = 1}^{31}{I(}ImmAPAScore(y,i))*\ NES(y,i),\ where\ I(x)\  = \left
 \end{matrix} \right.\ $$
 
 $$R3 = \frac{\sum_{i = 1}^{16}{R1i\  + \ R2\ *\ 16\ }}{32}$$
+
+
+**Construction of ICB_APASig score by machine learning**
+
+We performed a machine learning-based algorithm to construct ICB_APASig score. Briefly, 
+(1) we identified ICB-related ImmAPAs through comparing the differentially expressed ImmAPAs between Tumor Immune Dysfunction and Exclusion (TIDE) prediction-dependent non-responders and responders in TCGA metastatic SKCM, based on Wilcoxon signed-rank test.
+(2) We performed univariate Cox regression analysis to identify prognosis relevant DE ImmAPAs by assessing the association of OS and the PDUI level of ICB-related ImmAPAs;
+(3) We performed LASSO Cox regression model analysis and selected the optimal combination from ICB-related ImmAPAs in (2). 
+(4) We performed the multivariate Cox regression analysis on ICB-related ImmAPAs in (3) to obtain ImmAPAs with significant p-value (p < 0.05) as the final signature, named “$ICB\_APASig$”. 
+(5) The $ICB\_APASig$ score of each sample was constructed based on the PDUI level of $GPNMB (PDUI\_GPNMB)$ and $COL1A1 (PDUI\_COL1A1)$ and multivariate Cox regression coefficient as the following equations:    
+
+$$ICB\_APASig\  Score = 100*(-0.029 ∗ \ PDUI\_GPNMB + 0.056 ∗ PDUI\_COL1A1).$$
